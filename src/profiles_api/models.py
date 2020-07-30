@@ -29,7 +29,7 @@ class UserProfileManager(BaseUserManager):
         use to create super user
         """
 
-        user = self.create_user(name, email, password)
+        user = self.create_user(email, name, password)
         user.is_staff = True
         user.is_superuser = True
         user.save(using=self._db)
@@ -47,7 +47,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDs = ['name']
+    REQUIRED_FIELDS = ['name']
 
     objects = UserProfileManager()
 
