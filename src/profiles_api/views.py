@@ -3,9 +3,10 @@ from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, viewsets
+from rest_framework.authentication import TokenAuthentication
 
 
-from . import serializers, models
+from . import serializers, models, permissions
 
 
 class HelloApiView(APIView):
@@ -133,3 +134,5 @@ class UserProfileView(viewsets.ModelViewSet):
     """
     queryset = models.UserProfile.objects.all()
     serializer_class = serializers.UserProfileSerializer
+    permission_classes = (permissions.UpdateOwnProfile,)
+    authentication_classes = (TokenAuthentication,)
