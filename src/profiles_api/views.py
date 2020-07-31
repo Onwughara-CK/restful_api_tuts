@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status, viewsets
 
 
-from . import serializers
+from . import serializers, models
 
 
 class HelloApiView(APIView):
@@ -125,3 +125,11 @@ class HelloViewset(viewsets.ViewSet):
         """
 
         return Response({'message': 'DESTROY'})
+
+
+class UserProfileView(viewsets.ModelViewSet):
+    """
+    use to create user
+    """
+    queryset = models.UserProfile.objects.all()
+    serializer_class = serializers.UserProfileSerializer
