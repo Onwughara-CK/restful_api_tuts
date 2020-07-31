@@ -69,6 +69,8 @@ class HelloViewset(viewsets.ViewSet):
     use to test API ViewSet
     """
 
+    serializer_class = serializers.HelloSerializer
+
     def list(self, request):
         """
         returns a list of Viewset features
@@ -82,3 +84,44 @@ class HelloViewset(viewsets.ViewSet):
         ]
 
         return Response({'message': 'hello', "view_features": view_features})
+
+    def create(self, request):
+        """
+        returns a hello message
+        """
+
+        serializer = serializers.HelloSerializer(data=request.data)
+        if serializer.is_valid():
+            name = serializer.data.get('name')
+            message = {'message': 'hello', 'method': 'POST'}
+            return Response(message)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, pk=None):
+        """
+        returns a message
+        """
+
+        return Response({'message': 'GET'})
+
+    def update(self, request, pk=None):
+        """
+        returns a message
+        """
+
+        return Response({'message': 'PUT'})
+
+    def partial_update(self, request, pk=None):
+        """
+        returns a message
+        """
+
+        return Response({'message': 'PATCH'})
+
+    def destroy(self, request, pk=None):
+        """
+        deletes a message
+        """
+
+        return Response({'message': 'DESTROY'})
