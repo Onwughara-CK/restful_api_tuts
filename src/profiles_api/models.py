@@ -38,7 +38,7 @@ class UserProfileManager(BaseUserManager):
 
 class UserProfile(AbstractBaseUser, PermissionsMixin):
     """
-    Use to create our custom model
+    use to create our custom model
     """
 
     email = models.EmailField(max_length=255, unique=True)
@@ -53,7 +53,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     def get_full_name(self):
         """
-        Use to get user's full name
+        use to get user's full name
         """
 
         return self.name
